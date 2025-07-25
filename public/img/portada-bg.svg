@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <!-- Fondo oscuro con efecto de ciudad nocturna -->
+  <rect width="1920" height="1080" fill="#0A1929"/>
+  
+  <!-- Estrellas en el cielo nocturno -->
+  <g>
+    <!-- Estrellas pequeñas -->
+    <g fill="#FFFFFF" opacity="0.6">
+      <circle cx="100" cy="100" r="1"/>
+      <circle cx="200" cy="150" r="1"/>
+      <circle cx="300" cy="80" r="1"/>
+      <circle cx="400" cy="200" r="1"/>
+      <circle cx="500" cy="120" r="1"/>
+      <circle cx="600" cy="180" r="1"/>
+      <circle cx="700" cy="90" r="1"/>
+      <circle cx="800" cy="210" r="1"/>
+      <circle cx="900" cy="130" r="1"/>
+      <circle cx="1000" cy="190" r="1"/>
+      <circle cx="1100" cy="100" r="1"/>
+      <circle cx="1200" cy="220" r="1"/>
+      <circle cx="1300" cy="140" r="1"/>
+      <circle cx="1400" cy="200" r="1"/>
+      <circle cx="1500" cy="110" r="1"/>
+      <circle cx="1600" cy="230" r="1"/>
+      <circle cx="1700" cy="150" r="1"/>
+      <circle cx="1800" cy="210" r="1"/>
+      <circle cx="1900" cy="120" r="1"/>
+      <circle cx="150" cy="250" r="1"/>
+      <circle cx="250" cy="300" r="1"/>
+      <circle cx="350" cy="230" r="1"/>
+      <circle cx="450" cy="350" r="1"/>
+      <circle cx="550" cy="270" r="1"/>
+      <circle cx="650" cy="330" r="1"/>
+      <circle cx="750" cy="240" r="1"/>
+      <circle cx="850" cy="360" r="1"/>
+      <circle cx="950" cy="280" r="1"/>
+      <circle cx="1050" cy="340" r="1"/>
+      <circle cx="1150" cy="250" r="1"/>
+      <circle cx="1250" cy="370" r="1"/>
+      <circle cx="1350" cy="290" r="1"/>
+      <circle cx="1450" cy="350" r="1"/>
+      <circle cx="1550" cy="260" r="1"/>
+      <circle cx="1650" cy="380" r="1"/>
+      <circle cx="1750" cy="300" r="1"/>
+      <circle cx="1850" cy="360" r="1"/>
+    </g>
+    
+    <!-- Estrellas medianas -->
+    <g fill="#FFFFFF" opacity="0.8">
+      <circle cx="120" cy="180" r="2"/>
+      <circle cx="320" cy="220" r="2"/>
+      <circle cx="520" cy="160" r="2"/>
+      <circle cx="720" cy="240" r="2"/>
+      <circle cx="920" cy="180" r="2"/>
+      <circle cx="1120" cy="260" r="2"/>
+      <circle cx="1320" cy="200" r="2"/>
+      <circle cx="1520" cy="280" r="2"/>
+      <circle cx="1720" cy="220" r="2"/>
+      <circle cx="220" cy="320" r="2"/>
+      <circle cx="420" cy="260" r="2"/>
+      <circle cx="620" cy="340" r="2"/>
+      <circle cx="820" cy="280" r="2"/>
+      <circle cx="1020" cy="360" r="2"/>
+      <circle cx="1220" cy="300" r="2"/>
+      <circle cx="1420" cy="380" r="2"/>
+      <circle cx="1620" cy="320" r="2"/>
+      <circle cx="1820" cy="400" r="2"/>
+    </g>
+    
+    <!-- Estrellas grandes -->
+    <g fill="#FFFFFF">
+      <circle cx="180" cy="120" r="3"/>
+      <circle cx="480" cy="180" r="3"/>
+      <circle cx="780" cy="140" r="3"/>
+      <circle cx="1080" cy="200" r="3"/>
+      <circle cx="1380" cy="160" r="3"/>
+      <circle cx="1680" cy="220" r="3"/>
+      <circle cx="280" cy="260" r="3"/>
+      <circle cx="580" cy="220" r="3"/>
+      <circle cx="880" cy="280" r="3"/>
+      <circle cx="1180" cy="240" r="3"/>
+      <circle cx="1480" cy="300" r="3"/>
+      <circle cx="1780" cy="260" r="3"/>
+    </g>
+  </g>
+  
+  <!-- Silueta de ciudad en el horizonte -->
+  <g fill="#000000">
+    <!-- Edificios -->
+    <rect x="0" y="700" width="100" height="380"/>
+    <rect x="120" y="650" width="80" height="430"/>
+    <rect x="220" y="750" width="120" height="330"/>
+    <rect x="360" y="600" width="70" height="480"/>
+    <rect x="450" y="680" width="90" height="400"/>
+    <rect x="560" y="620" width="60" height="460"/>
+    <rect x="640" y="700" width="110" height="380"/>
+    <rect x="770" y="580" width="80" height="500"/>
+    <rect x="870" y="650" width="100" height="430"/>
+    <rect x="990" y="550" width="70" height="530"/>
+    <rect x="1080" y="630" width="90" height="450"/>
+    <rect x="1190" y="680" width="60" height="400"/>
+    <rect x="1270" y="600" width="110" height="480"/>
+    <rect x="1400" y="650" width="80" height="430"/>
+    <rect x="1500" y="700" width="100" height="380"/>
+    <rect x="1620" y="580" width="70" height="500"/>
+    <rect x="1710" y="630" width="90" height="450"/>
+    <rect x="1820" y="680" width="100" height="400"/>
+    
+    <!-- Detalles de edificios (ventanas) -->
+    <g fill="#FFEB3B" opacity="0.8">
+      <!-- Ventanas aleatorias en los edificios -->
+      <rect x="20" y="720" width="10" height="10"/>
+      <rect x="50" y="750" width="10" height="10"/>
+      <rect x="30" y="800" width="10" height="10"/>
+      <rect x="60" y="850" width="10" height="10"/>
+      <rect x="40" y="900" width="10" height="10"/>
+      <rect x="70" y="950" width="10" height="10"/>
+      
+      <rect x="130" y="670" width="10" height="10"/>
+      <rect x="160" y="720" width="10" height="10"/>
+      <rect x="140" y="770" width="10" height="10"/>
+      <rect x="170" y="820" width="10" height="10"/>
+      <rect x="150" y="870" width="10" height="10"/>
+      <rect x="180" y="920" width="10" height="10"/>
+      
+      <rect x="240" y="770" width="10" height="10"/>
+      <rect x="270" y="820" width="10" height="10"/>
+      <rect x="250" y="870" width="10" height="10"/>
+      <rect x="280" y="920" width="10" height="10"/>
+      <rect x="260" y="970" width="10" height="10"/>
+      <rect x="290" y="1020" width="10" height="10"/>
+      
+      <!-- Continuar con ventanas para los demás edificios -->
+      <!-- ... -->
+    </g>
+  </g>
+  
+  <!-- Luces de la ciudad (puntos brillantes) -->
+  <g fill="#FFA000" opacity="0.6">
+    <circle cx="50" y="750" r="2"/>
+    <circle cx="150" y="700" r="2"/>
+    <circle cx="250" y="800" r="2"/>
+    <circle cx="350" y="650" r="2"/>
+    <circle cx="450" y="730" r="2"/>
+    <circle cx="550" y="680" r="2"/>
+    <circle cx="650" y="750" r="2"/>
+    <circle cx="750" y="630" r="2"/>
+    <circle cx="850" y="700" r="2"/>
+    <circle cx="950" y="650" r="2"/>
+    <circle cx="1050" y="730" r="2"/>
+    <circle cx="1150" y="680" r="2"/>
+    <circle cx="1250" y="750" r="2"/>
+    <circle cx="1350" y="630" r="2"/>
+    <circle cx="1450" y="700" r="2"/>
+    <circle cx="1550" y="650" r="2"/>
+    <circle cx="1650" y="730" r="2"/>
+    <circle cx="1750" y="680" r="2"/>
+    <circle cx="1850" y="750" r="2"/>
+  </g>
+  
+  <!-- Efecto de brillo en el horizonte -->
+  <rect x="0" y="700" width="1920" height="20" fill="#FFA000" opacity="0.3"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <!-- Fondo -->
+  <rect width="600" height="400" fill="#F7DF1E" rx="20" ry="20"/>
+  
+  <!-- Logo de JavaScript -->
+  <g transform="translate(150, 50) scale(1.5)">
+    <!-- JS Logo (forma simplificada) -->
+    <path d="M 50,50 L 150,50 L 150,150 L 50,150 Z" fill="#F7DF1E" stroke="#000" stroke-width="5"/>
+    
+    <!-- Letra J -->
+    <path d="M 80,75 L 95,75 L 95,115 C 95,125 90,130 80,130 C 75,130 70,128 68,125 L 75,115 C 76,117 78,118 80,118 C 83,118 85,116 85,110 L 85,75 Z" fill="#000"/>
+    
+    <!-- Letra S -->
+    <path d="M 125,125 C 120,130 115,130 110,130 C 100,130 95,125 95,115 L 105,110 C 105,115 110,118 115,115 C 118,113 118,110 115,108 L 110,105 C 100,100 100,90 105,85 C 110,80 120,80 125,85 L 120,95 C 118,93 115,92 113,93 C 110,95 110,98 113,100 L 118,103 C 128,108 130,120 125,125 Z" fill="#000"/>
+  </g>
+  
+  <!-- Texto "JavaScript" -->
+  <text x="300" y="300" font-family="Arial, sans-serif" font-size="50" font-weight="bold" text-anchor="middle" fill="black">JavaScript</text>
+</svg>

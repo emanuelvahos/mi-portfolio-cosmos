@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Emanuel Vahos Villa</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    
+    /* Estilos para la sección Acerca de mí */
+    .x6lozz2 {
+      padding: 5rem 0;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .x6lozz3 {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .l56esfn {
+      margin-bottom: 1.5rem;
+    }
+    
+    .l56esf2 {
+      color: #fff;
+    }
+    
+    .l56esf0 {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .l56esfo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    
+    .l56esfp {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    
+    /* Sección 1: Portada */
+    .portada {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .portada::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .portada-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    
+    .portada h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 3px;
+    }
+    
+    .portada h2 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+    }
+    
+    .portada-inscripcion {
+      max-width: 800px;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin: 0 auto 2rem;
+      text-align: center;
+      font-style: italic;
+      color: #e0e0ff;
+      text-shadow: 0 0 10px rgba(100, 150, 255, 0.8);
+    }
+    
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* Sección 2: Acerca de mí */
+    .acerca-de {
+      padding: 5rem 0;
+      background-color: #000;
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      text-align: center;
+      position: relative;
+    }
+    
+    .acerca-de::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .acerca-de-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .acerca-de h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    .acerca-de p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: #fff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    
+    .contacto {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .contacto a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+    }
+    
+    .contacto a:hover {
+      color: #FFD700;
+    }
+    
+    /* Sección 3: Grafo de habilidades */
+    .habilidades {
+      padding: 5rem 0;
+      background-color: #000;
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+    
+    .habilidades::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .habilidades-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .habilidades h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #FFD700;
+      text-shadow: 0 0 15px rgba(100, 150, 255, 0.7);
+      letter-spacing: 2px;
+    }
+    
+    #mynetwork {
+      width: 100%;
+      height: 600px;
+      border: 1px solid rgba(100, 150, 255, 0.3);
+      border-radius: 10px;
+      background-color: rgba(10, 15, 30, 0.7);
+      box-shadow: 0 0 20px rgba(100, 150, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #mynetwork::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at center, rgba(100, 150, 255, 0.1) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .zoom-instructions {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(20, 30, 60, 0.8);
+      color: #64B5F6;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(100, 150, 255, 0.3);
+      border: 1px solid rgba(100, 150, 255, 0.2);
+      backdrop-filter: blur(3px);
+    }
+    
+    .graph-legend {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(20, 30, 60, 0.8);
+      color: #fff;
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(100, 150, 255, 0.3);
+      border: 1px solid rgba(100, 150, 255, 0.2);
+      backdrop-filter: blur(3px);
+      max-width: 200px;
+    }
+    
+    .legend-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #FFD700;
+      font-size: 1rem;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+    
+    .legend-color {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin-right: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .panel-info {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.9);
+      border: 1px solid #FFD700;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 1000;
+      max-width: 500px;
+      width: 90%;
+      display: none;
+    }
+    
+    .panel-info h3 {
+      color: #FFD700;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .panel-info p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    
+    .panel-info .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    
+    .panel-info .close-btn:hover {
+      color: #FFD700;
+    }
+    
+    .panel-info img {
+      max-width: 100%;
+      max-height: 300px; /* Altura máxima estandarizada */
+      width: auto;
+      height: auto;
+      object-fit: contain; /* Mantiene la proporción de la imagen */
+      margin-bottom: 15px;
+      border-radius: 5px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sección 1: Portada -->
+  <section class="portada" id="inicio">
+    <div class="portada-content">
+      <h1>PORTFOLIO</h1>
+      <h2>EMANUEL VAHOS VILLA</h2>
+      <p class="portada-inscripcion">Así como un cielo estrellado revela patrones y constelaciones ocultas en la inmensidad, mi función es descubrir las conexiones y la luz en el vasto universo de la información.</p>
+    </div>
+    <a href="#acerca-de" class="scroll-down">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+  
+  <!-- Sección 2: Acerca de mí -->
+  <section class="acerca-de" id="acerca-de">
+    <div class="x6lozz2" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, 0px, 0px) scale(0.8651, 0.8651); background-image: radial-gradient(circle at 44.6051% 92.1016vh, rgba(100, 150, 255, 0.3) 0%, rgba(70, 100, 200, 0.5) 44.6721%, rgba(40, 60, 150, 0.7) 67.7645%, rgba(20, 30, 80, 0) 103.949%); mask-image: radial-gradient(at 50% 0vh, rgb(0, 0, 0) 120vh, rgba(0, 0, 0, 0) 200vh); opacity: 1; visibility: inherit;">
+      <h3 class="x6lozz3 l56esfn l56esf2 l56esf0 l56esfo">Acerca de mí</h3>
+      <p class="x6lozz3 l56esfn l56esf2 l56esf0 l56esfp">Futuro ingeniero en ciencia de datos del ITM, apasionado por la analítica y la innovación. Mi estancia de un año en Francia me permitió expandir significativamente mis concocimientos en datos, combinando el aprendizaje cultural con el avance profesional. Orgulloso ganador del Hackathon del programa Talento Tech, siempre buscando aplicar mis habilidades para generar soluciones de impacto</p>
+      <div class="contacto">
+        <a href="tel:3057356068">
+          <i class="fas fa-phone"></i> 3057356068
+        </a>
+        <a href="www.linkedin.com/in/emanuel-vahos-7aa3852b0" target="_blank">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://www.instagram.com/emanuelvahos" target="_blank">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección 3: Grafo de habilidades -->
+  <section class="habilidades" id="habilidades">
+    <div class="habilidades-content">
+      <h2>MIS CONOCIMIENTOS</h2>
+      <div id="mynetwork">
+        <div class="zoom-instructions">
+          <i class="fas fa-search"></i> Mantén CTRL y usa el scroll para hacer zoom
+        </div>
+        <div class="graph-legend">
+          <div class="legend-title">Leyenda:</div>
+          <div class="legend-item"><span class="legend-color" style="background-color: #FFD700;"></span>Nodo Principal</div>
+          <div class="legend-item"><span class="legend-color" style="background-color: #64B5F6;"></span>Habilidades</div>
+          <div class="legend-item"><span class="legend-color" style="background-color: #7E57C2;"></span>Conocimientos</div>
+          <div class="legend-item"><span class="legend-color" style="background-color: #4DB6AC;"></span>Certificaciones</div>
+          <div class="legend-item"><span class="legend-color" style="background-color: #87CEEB;"></span>Proyectos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Panel de información para proyectos y habilidades -->
+  <div class="panel-info" id="panel-info">
+    <button class="close-btn" id="close-panel">
+      <i class="fas fa-times"></i>
+    </button>
+    <h3 id="panel-title">Título del Proyecto/Habilidad</h3>
+    <img id="panel-image" src="" alt="">
+    <p id="panel-description">Descripción detallada del proyecto o habilidad seleccionada.</p>
+  </div>
+  
+  <script type="text/javascript">
+    // Inicializar Lenis para smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Registrar plugins de GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animación mejorada de la portada al hacer scroll
+    gsap.to('.portada', {
+      scrollTrigger: {
+        trigger: '.portada',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: -100,
+      scale: 0.9,
+      duration: 1.5,
+    });
+
+    // Animación para la sección Acerca de mí con efecto de aparición
+    gsap.fromTo('.acerca-de', 
+      { // Estado inicial
+        opacity: 0,
+        y: 100,
+        scale: 0.8,
+      },
+      { // Estado final
+        scrollTrigger: {
+          trigger: '.acerca-de',
+          start: 'top 90%',
+          end: 'top 40%',
+          scrub: 1,
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+      }
+    );
+    
+    // Animación para el contenido de Acerca de mí
+    gsap.from('.x6lozz2', {
+      scrollTrigger: {
+        trigger: '.acerca-de',
+        start: 'top 80%',
+        end: 'center center',
+        scrub: 1,
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 0,
+      y: 50,
+      scale: 0.8,
+      duration: 1,
+    });
+
+    // Animación para el título y texto de Acerca de mí
+    gsap.from('.l56esfo', {
+      scrollTrigger: {
+        trigger: '.acerca-de',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      delay: 0.2,
+    });
+
+    gsap.from('.l56esfp', {
+      scrollTrigger: {
+        trigger: '.acerca-de',
+        start: 'top 60%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      delay: 0.4,
+    });
+
+    // Animación para la sección de habilidades
+    gsap.from('.habilidades-content', {
+      scrollTrigger: {
+        trigger: '.habilidades',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+    });
+
+    // Animación de línea de tiempo al hacer scroll
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+      }
+    });
+
+    // Añadir animaciones a la línea de tiempo
+    timeline
+      .to('.portada::before', { opacity: 0.9, duration: 2 }, 0)
+      .to('.portada', { backgroundPosition: '50% 70%', duration: 4 }, 0)
+      .to('.acerca-de', { backgroundPosition: '50% 30%', duration: 4 }, 2)
+      .to('.habilidades', { backgroundPosition: '50% 50%', duration: 4 }, 4);
+
+    // Nodos
+    var nodes = [
+      { id: 1, label: "Emanuel Vahos Villa", shape: "ellipse", color: "#FFD700" },
+      { id: 2, label: "Python", group: "habilidad" },
+      { id: 3, label: "Data Analytics", group: "habilidad" },
+      { id: 4, label: "Machine Learning", group: "conocimiento" },
+      { id: 5, label: "IA Generativa", group: "conocimiento" },
+      { id: 6, label: "Certificado Python", group: "certificacion" },
+      { id: 7, label: "Certificado Google Data Analytics", group: "certificacion" },
+      { id: 8, label: "Fundamentos IA Generativa", group: "certificacion" },
+      { id: 9, label: "IA para Científicos de Datos", group: "certificacion" },
+      { id: 10, label: "IA para Desarrolladores", group: "certificacion" },
+      { id: 11, label: "IA para Gerentes", group: "certificacion" },
+      { id: 12, label: "Bootcamp Data Analytics UdeA", group: "certificacion" },
+      { id: 13, label: "Proyecto Sano y Fresco", shape: "box", color: "#87CEEB" }
+    ];
+
+    // Conexiones
+    var edges = [
+      // Conexiones principales desde el nodo central
+      { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 1, to: 4 }, { from: 1, to: 5 },
+      { from: 1, to: 6 }, { from: 1, to: 7 }, { from: 1, to: 8 }, { from: 1, to: 9 },
+      { from: 1, to: 10 }, { from: 1, to: 11 }, { from: 1, to: 12 }, { from: 1, to: 13 },
+      
+      // Conexiones entre habilidades, conocimientos y certificaciones
+      { from: 2, to: 6 }, // Python - Certificado Python
+      { from: 3, to: 7 }, // Data Analytics - Certificado Google
+      { from: 3, to: 12 }, // Data Analytics - Bootcamp UdeA
+      { from: 4, to: 13 }, // Machine Learning - Proyecto Sano y Fresco
+      { from: 5, to: 8 }, // IA Generativa - Fundamentos IA
+      { from: 5, to: 9 }, // IA Generativa - IA para Científicos
+      { from: 5, to: 10 }, // IA Generativa - IA para Desarrolladores
+      { from: 5, to: 11 }, // IA Generativa - IA para Gerentes
+      { from: 2, to: 13 }, // Python - Proyecto Sano y Fresco
+      { from: 3, to: 13 }  // Data Analytics - Proyecto Sano y Fresco
+    ];
+
+    // Información detallada para cada nodo
+    var nodeInfo = {
+      2: {
+        title: "Python",
+        image: "img/python.svg",
+        description: "Lenguaje de programación versátil utilizado en análisis de datos, machine learning, desarrollo web y automatización. Experiencia en bibliotecas como Pandas, NumPy, Scikit-learn y TensorFlow."
+      },
+      3: {
+        title: "Data Analytics",
+        image: "img/machine-learning.svg",
+        description: "Habilidades en análisis de datos, incluyendo recolección, limpieza, procesamiento y visualización de información para extraer insights valiosos y apoyar la toma de decisiones basada en datos."
+      },
+      4: {
+        title: "Machine Learning",
+        image: "img/machine-learning.svg",
+        description: "Conocimientos en algoritmos de aprendizaje supervisado y no supervisado, procesamiento de datos, evaluación de modelos y aplicaciones prácticas para resolver problemas complejos."
+      },
+      5: {
+        title: "IA Generativa",
+        image: "img/Fundamentos de la IA generativa.png",
+        description: "Conocimientos en modelos de inteligencia artificial generativa, incluyendo transformers, difusión y GANs, para crear contenido nuevo y resolver problemas complejos en diversos campos."
+      },
+      6: {
+        title: "Certificado Python",
+        image: "img/Pythoncertificadopng.png",
+        description: "Certificación que valida mis habilidades avanzadas en Python, incluyendo programación orientada a objetos, manejo de datos y desarrollo de aplicaciones para análisis de datos."
+      },
+      7: {
+        title: "Certificado Google Data Analytics",
+        image: "img/Certificado analisis de datos de google.png",
+        description: "Certificación profesional de Google que valida mis competencias en el ciclo completo de análisis de datos: preguntar, preparar, procesar, analizar, compartir y actuar, utilizando herramientas como SQL, R y Tableau."
+      },
+      8: {
+        title: "Fundamentos de IA Generativa",
+        image: "img/Fundamentos de la IA generativa.png",
+        description: "Certificación que acredita mi comprensión de los conceptos fundamentales de la IA generativa, incluyendo modelos de lenguaje grandes, procesamiento de lenguaje natural y aplicaciones prácticas."
+      },
+      9: {
+        title: "Especialización en IA Generativa para Científicos de Datos",
+        image: "img/Especialización en IA generativa para científicos de datos.png",
+        description: "Especialización que valida mis habilidades para aplicar técnicas de IA generativa en el campo del análisis de datos, incluyendo generación de datos sintéticos, aumento de datos y extracción de insights."
+      },
+      10: {
+        title: "Especialización en IA Generativa para Desarrolladores",
+        image: "img/Especialización en IA generativa para desarrolladores de software.png",
+        description: "Especialización que certifica mis capacidades para integrar modelos de IA generativa en aplicaciones de software, incluyendo APIs, fine-tuning y despliegue de modelos."
+      },
+      11: {
+        title: "Especialización en IA Generativa para Gerentes de Proyectos",
+        image: "img/Especialización en IA generativa para gerentes de proyectos.png",
+        description: "Especialización que acredita mis conocimientos para liderar proyectos que incorporan IA generativa, incluyendo evaluación de casos de uso, gestión de recursos y consideraciones éticas."
+      },
+      12: {
+        title: "Bootcamp Data Analytics UdeA",
+        image: "img/Certificado UdeA.png",
+        description: "Programa intensivo de la Universidad de Antioquia que certifica mis habilidades en análisis de datos, incluyendo estadística, visualización, machine learning y presentación de resultados para la toma de decisiones."
+      },
+      13: {
+        title: "Proyecto Sano y Fresco",
+        image: "img/proyectopowerbi.png",
+        description: "Sistema de análisis de datos utilizando Python, técnicas de machine learning y PowerBI para procesar y visualizar grandes volúmenes de información y generar insights valiosos para la toma de decisiones empresariales."
+      }
+    };
+
+    var container = document.getElementById("mynetwork");
+    var data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+    var options = {
+      nodes: {
+        shape: "dot",
+        size: 25,
+        font: {
+          color: "#ffffff",
+          size: 16,
+          face: "Montserrat",
+          bold: "true"
+        }
+      },
+      groups: {
+        habilidad: { color: "#64B5F6" },  // Azul celeste
+        conocimiento: { color: "#7E57C2" }, // Púrpura
+        certificacion: { color: "#4DB6AC" }  // Turquesa
+      },
+      physics: { 
+        stabilization: true,
+        barnesHut: {
+          gravitationalConstant: -50000,
+          springConstant: 0.002,
+          springLength: 150,
+          centralGravity: 0.8
+        }
+      },
+      interaction: {
+        hover: true,
+        tooltipDelay: 200,
+        zoomView: true,
+        dragView: true
+      }
+    };
+    
+    var network = new vis.Network(container, data, options);
+    
+    // Panel de información
+    var panel = document.getElementById("panel-info");
+    var panelTitle = document.getElementById("panel-title");
+    var panelImage = document.getElementById("panel-image");
+    var panelDescription = document.getElementById("panel-description");
+    var closePanel = document.getElementById("close-panel");
+    
+    // Evento de clic en nodo
+    network.on("click", function(params) {
+      if (params.nodes.length > 0) {
+        var nodeId = params.nodes[0];
+        if (nodeId !== 1 && nodeInfo[nodeId]) { // No mostrar panel para el nodo central
+          panelTitle.textContent = nodeInfo[nodeId].title;
+          panelImage.src = nodeInfo[nodeId].image;
+          panelImage.alt = nodeInfo[nodeId].title;
+          panelDescription.textContent = nodeInfo[nodeId].description;
+          panel.style.display = "block";
+        }
+      }
+    });
+    
+    // Cerrar panel
+    closePanel.addEventListener("click", function() {
+      panel.style.display = "none";
+    });
+    
+    // Cerrar panel al hacer clic fuera de él
+    window.addEventListener("click", function(event) {
+      if (event.target === panel) {
+        panel.style.display = "none";
+      }
+    });
+    
+    // Navegación suave usando Lenis
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        lenis.scrollTo(target, {
+          offset: 0,
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      });
+    });
+  </script>
+</body>
+</html>

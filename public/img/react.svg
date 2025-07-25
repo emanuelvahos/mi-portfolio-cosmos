@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <!-- Fondo -->
+  <rect width="600" height="400" fill="#282C34" rx="20" ry="20"/>
+  
+  <!-- Logo de React -->
+  <g transform="translate(300, 180)">
+    <!-- Órbitas -->
+    <ellipse rx="150" ry="50" fill="none" stroke="#61DAFB" stroke-width="6" transform="rotate(0)"/>
+    <ellipse rx="150" ry="50" fill="none" stroke="#61DAFB" stroke-width="6" transform="rotate(60)"/>
+    <ellipse rx="150" ry="50" fill="none" stroke="#61DAFB" stroke-width="6" transform="rotate(120)"/>
+    
+    <!-- Núcleo -->
+    <circle r="30" fill="#61DAFB"/>
+  </g>
+  
+  <!-- Texto "React" -->
+  <text x="300" y="320" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#61DAFB">React</text>
+</svg>
