@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Emanuel Vahos Villa</title>
+  <!-- Biblioteca vis-network temporalmente eliminada -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Estilos para la barra de navegación */
+     .navbar {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       background-color: rgba(10, 25, 47, 0.85);
+       backdrop-filter: blur(10px);
+       z-index: 1000;
+       padding: 15px 0;
+       transition: all 0.3s ease;
+       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+     }
+     
+     .navbar.scrolled {
+       padding: 10px 0;
+       background-color: rgba(10, 25, 47, 0.95);
+     }
+    
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .navbar-logo {
+       color: var(--color-highlight);
+       font-weight: 700;
+       font-size: 1.5rem;
+       text-decoration: none;
+       letter-spacing: 1px;
+     }
+     
+     .navbar-menu {
+       display: flex;
+       list-style: none;
+     }
+     
+     .navbar-menu li {
+       margin-left: 30px;
+     }
+     
+     .navbar-menu a {
+       color: var(--color-light);
+       text-decoration: none;
+       font-size: 1rem;
+       font-weight: 500;
+       transition: color 0.3s ease;
+       position: relative;
+     }
+     
+     .navbar-menu a:hover {
+       color: var(--color-secondary);
+     }
+     
+     .navbar-menu a::after {
+       content: '';
+       position: absolute;
+       width: 0;
+       height: 2px;
+       bottom: -5px;
+       left: 0;
+       background-color: var(--color-secondary);
+       transition: width 0.3s ease;
+     }
+     
+     .navbar-menu a:hover::after {
+        width: 100%;
+      }
+      
+      .navbar-menu a.active {
+        color: var(--color-highlight);
+      }
+      
+      .navbar-menu a.active::after {
+        width: 100%;
+        background-color: var(--color-highlight);
+      }
+    
+    /* Ajuste para el contenido debajo de la navbar */
+     body {
+       padding-top: 0;
+     }
+     
+     section {
+       padding-top: 80px;
+       margin-top: -80px;
+       padding-bottom: var(--spacing-xl);
+     }
+     
+     .section-title {
+       margin-bottom: var(--spacing-lg);
+       text-align: center;
+       font-size: var(--font-size-xl);
+       font-weight: var(--font-weight-bold);
+       color: var(--color-highlight);
+     }
+     
+     .section-description {
+       max-width: 800px;
+       margin: 0 auto var(--spacing-lg);
+       text-align: center;
+       font-size: var(--font-size-md);
+       line-height: var(--line-height-loose);
+       color: var(--color-gray);
+     }
+    
+    /* Botón de menú móvil */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      .navbar-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background-color: rgba(10, 25, 47, 0.95);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        transition: left 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+      }
+      
+      .navbar-menu.active {
+        left: 0;
+      }
+      
+      .navbar-menu li {
+        margin: 15px 0;
+      }
+      
+      /* Ajustes responsive para la portada */
+      .portada h1 {
+        font-size: 3rem;
+      }
+      
+      .portada h2 {
+        font-size: 2rem;
+      }
+      
+      .portada-inscripcion {
+        font-size: 1rem;
+        padding: 0 20px;
+      }
+      
+      /* Ajustes responsive para secciones */
+      section {
+        padding-top: 60px;
+        margin-top: -60px;
+      }
+      
+      .acerca-de-content,
+      .habilidades-content,
+      .proyectos-content,
+      .experiencia-content,
+      .contacto-content {
+        padding: 0 15px;
+      }
+      
+      /* Ajustes responsive para proyectos */
+      .proyectos-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      /* Ajustes responsive para contacto */
+      .contacto-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      /* Ajustes responsive para timeline */
+      .timeline {
+        padding-left: 20px;
+      }
+      
+      .timeline-dot {
+        left: -26px;
+      }
+    }
+  </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-normal);
+      font-weight: var(--font-weight-regular);
+      letter-spacing: 0.3px;
+    }
+    
+    h1 {
+      font-size: var(--font-size-xxl);
+      line-height: var(--line-height-tight);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    h2 {
+      font-size: var(--font-size-xl);
+      line-height: var(--line-height-tight);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    h3 {
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-tight);
+      font-weight: var(--font-weight-medium);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    h4 {
+      font-size: var(--font-size-md);
+      line-height: var(--line-height-normal);
+      font-weight: var(--font-weight-medium);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    p {
+      margin-bottom: var(--spacing-sm);
+      line-height: var(--line-height-loose);
+    }
+    
+    section {
+      padding: var(--spacing-xl) 0;
+    }
+    
+    :root {
+      --color-primary: #2c3e50;      /* Azul oscuro */
+      --color-secondary: #3498db;    /* Azul claro */
+      --color-accent: #e74c3c;       /* Rojo suave */
+      --color-highlight: #f1c40f;    /* Amarillo dorado */
+      --color-dark: #1a252f;         /* Casi negro */
+      --color-light: #ecf0f1;        /* Blanco hueso */
+      --color-gray: #95a5a6;         /* Gris medio */
+      --color-success: #27ae60;      /* Verde */
+      --color-bg-dark: #0a192f;      /* Azul muy oscuro */
+      --color-bg-light: #112240;     /* Azul oscuro */
+      --font-main: 'Montserrat', sans-serif;
+      
+      /* Variables para tipografía */
+      --font-size-xxl: 3.5rem;
+      --font-size-xl: 2.5rem;
+      --font-size-lg: 1.8rem;
+      --font-size-md: 1.2rem;
+      --font-size-sm: 1rem;
+      --font-size-xs: 0.9rem;
+      
+      /* Variables para espaciado */
+      --spacing-xxl: 5rem;
+      --spacing-xl: 4rem;
+      --spacing-lg: 3rem;
+      --spacing-md: 2rem;
+      --spacing-sm: 1rem;
+      --spacing-xs: 0.5rem;
+      
+      /* Variables para línea de altura */
+      --line-height-loose: 1.8;
+      --line-height-normal: 1.6;
+      --line-height-tight: 1.4;
+      
+      /* Variables para peso de fuente */
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+    }
+    
+    body {
+      background-color: var(--color-bg-dark);
+      color: var(--color-light);
+      overflow-x: hidden;
+      font-family: var(--font-main);
+    }
+    
+    /* Estilos para la sección Acerca de mí */
+    .x6lozz2 {
+      padding: 5rem 0;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .x6lozz3 {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .l56esfn {
+      margin-bottom: 1.5rem;
+    }
+    
+    .l56esf2 {
+      color: #fff;
+    }
+    
+    .l56esf0 {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .l56esfo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    
+    .l56esfp {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    
+    /* Sección 1: Portada */
+    .portada {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      padding-top: 120px; /* Aumentado para evitar que la barra de navegación tape el contenido */
+    }
+    
+    .portada::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 25, 47, 0.85);
+      background-image: linear-gradient(to bottom, rgba(10, 25, 47, 0.9), rgba(17, 34, 64, 0.8));
+    }
+    
+    .portada-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .portada-foto {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .foto-perfil {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ffffff;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+      max-width: 1000px;
+      margin: 0 auto;
+      display: block;
+    }
+    
+    .portada h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      letter-spacing: 3px;
+      color: var(--color-light);
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .portada h2 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+    
+    .portada-inscripcion {
+      max-width: 800px;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin: 0 auto 2rem;
+      text-align: center;
+      font-style: italic;
+      color: var(--color-gray);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .portada-botones {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .btn-cv {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, var(--color-highlight), var(--color-secondary));
+      color: var(--color-light);
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-cv i {
+      margin-right: 8px;
+    }
+    
+    .btn-cv:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      color: var(--color-secondary);
+      transition: color 0.3s ease;
+    }
+    
+    .scroll-down:hover {
+      color: var(--color-highlight);
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* Estilos generales para enlaces */
+    a {
+      color: var(--color-secondary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: var(--color-highlight);
+    }
+    
+    /* Estilos para sección de Proyectos */
+    .proyectos {
+      padding: 5rem 0;
+      background-color: var(--color-bg);
+      position: relative;
+    }
+    
+    .proyectos::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10, 25, 47, 0.95), rgba(17, 34, 64, 0.95));
+      z-index: 0;
+    }
+    
+    .proyectos-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .proyectos h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--color-light);
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .proyectos h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-secondary);
+    }
+    
+    .proyectos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+    
+    .proyecto-card {
+      background-color: rgba(17, 34, 64, 0.7);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Estilos específicos para tarjetas de logros */
+    .logro-card {
+      border: 2px solid var(--color-accent);
+      position: relative;
+    }
+    
+    .logro-card::before {
+      content: '🏆 Logro Destacado';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--color-accent);
+      color: var(--color-bg-primary);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 2;
+    }
+    
+    .proyecto-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .proyecto-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .proyecto-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .proyecto-card:hover .proyecto-img img {
+      transform: scale(1.05);
+    }
+    
+    .proyecto-info {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .proyecto-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--color-highlight);
+    }
+    
+    .proyecto-info p {
+      margin-bottom: 15px;
+      color: var(--color-light);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+    
+    .proyecto-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .proyecto-tech span {
+      background-color: rgba(10, 25, 47, 0.7);
+      color: var(--color-secondary);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    
+    .proyecto-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .proyecto-links a {
+      color: var(--color-light);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .proyecto-links a:hover {
+      color: var(--color-highlight);
+    }
+    
+    /* Estilos para sección de Experiencia */
+    .experiencia {
+      padding: 5rem 0;
+      background-color: var(--color-bg-light);
+      position: relative;
+    }
+    
+    .experiencia::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.05;
+      z-index: 0;
+    }
+    
+    .experiencia-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .experiencia h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--color-light);
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .experiencia h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-secondary);
+    }
+    
+    .timeline {
+      position: relative;
+      margin: 3rem 0;
+      padding-left: 30px;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      height: calc(100% - 10px);
+      width: 2px;
+      background-color: var(--color-secondary);
+    }
+    
+    .timeline-header {
+      font-size: 1.8rem;
+      color: var(--color-highlight);
+      margin-bottom: 2rem;
+      padding-left: 15px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      left: -36px;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--color-highlight);
+      border: 3px solid var(--color-bg-light);
+      z-index: 1;
+    }
+    
+    .timeline-date {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content {
+      background-color: rgba(17, 34, 64, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .timeline-content h4 {
+      font-size: 1.3rem;
+      color: var(--color-light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content h5 {
+      font-size: 1rem;
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    
+    .timeline-content p {
+      color: var(--color-gray);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .timeline-links a {
+      display: inline-flex;
+      align-items: center;
+      color: var(--color-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+    
+    .timeline-links a i {
+      margin-right: 5px;
+    }
+    
+    .timeline-links a:hover {
+      color: var(--color-highlight);
+    }
+    
+    /* Estilos para sección de Contacto */
+    .contacto-seccion {
+      padding: 5rem 0;
+      background-color: var(--color-bg);
+      position: relative;
+    }
+    
+    .contacto-seccion::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .contacto-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .contacto-seccion h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-light);
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .contacto-seccion h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-secondary);
+    }
+    
+    .contacto-descripcion {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      color: var(--color-gray);
+    }
+    
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .contacto-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-sm);
+      padding: var(--spacing-xs);
+      transition: transform 0.3s ease;
+    }
+    
+    .contacto-item i {
+      font-size: var(--font-size-lg);
+      color: var(--color-highlight);
+      margin-right: var(--spacing-xs);
+      width: 30px;
+      text-align: center;
+    }
+    
+    .contacto-item h4 {
+      font-size: 1.1rem;
+      color: var(--color-secondary);
+      margin-bottom: 5px;
+    }
+    
+    .contacto-item p {
+      color: var(--color-light);
+    }
+    
+    .contacto-redes {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .contacto-redes a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background-color: rgba(17, 34, 64, 0.7);
+      border-radius: 50%;
+      color: var(--color-light);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .contacto-redes a:hover {
+      background-color: var(--color-secondary);
+      color: var(--color-bg);
+      transform: translateY(-3px);
+    }
+    
+    .contacto-formulario form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .form-group {
+      position: relative;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      background-color: rgba(17, 34, 64, 0.7);
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
+      color: var(--color-light);
+      font-family: var(--font-primary);
+      transition: all 0.3s ease;
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 2px rgba(var(--color-secondary-rgb), 0.2);
+    }
+    
+    .btn-enviar {
+      background-color: var(--color-secondary);
+      color: var(--color-bg);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+      margin-top: 10px;
+    }
+    
+    .btn-enviar:hover {
+      background-color: var(--color-highlight);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Sección 2: Acerca de mí */
+    .acerca-de {
+      padding: 5rem 0;
+      background-color: var(--color-bg-light);
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      text-align: center;
+      position: relative;
+    }
+    
+    .acerca-de::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(17, 34, 64, 0.85);
+      background-image: linear-gradient(to bottom, rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.8));
+    }
+    
+    .acerca-de-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .acerca-de h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--color-light);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .acerca-de h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-secondary);
+    }
+    
+    .acerca-de p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: var(--color-light);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    
+    .contacto {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .contacto a {
+      color: var(--color-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background-color: rgba(10, 25, 47, 0.5);
+    }
+    
+    .contacto a:hover {
+      color: var(--color-highlight);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      background-color: rgba(17, 34, 64, 0.8);
+    }
+    
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    
+    .contact-links a {
+      font-size: 1.5rem;
+      color: var(--color-light);
+      transition: all 0.3s ease;
+      padding: 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(10, 25, 47, 0.5);
+      width: 50px;
+      height: 50px;
+    }
+    
+    .contact-links a:hover {
+      color: var(--color-highlight);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      background-color: rgba(17, 34, 64, 0.8);
+    }
+    
+    /* Sección 3: Grafo de habilidades */
+    .habilidades {
+      padding: 5rem 0;
+      background-color: var(--color-bg-dark);
+      background-image: url('img/cosmos-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+    
+    .habilidades::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 25, 47, 0.8);
+    }
+    
+    .habilidades-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .habilidades h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--color-light);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .habilidades h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-secondary);
+    }
+    
+    /* Estilos para las barras de progreso de habilidades */
+    .skills-container {
+      margin-bottom: 60px;
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .skills-subtitle {
+      font-size: 1.8rem;
+      color: var(--color-secondary);
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 15px;
+    }
+    
+    .skills-subtitle::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: var(--color-highlight);
+      border-radius: 2px;
+    }
+    
+    .skills-description {
+      color: var(--color-light);
+      margin-bottom: 30px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    
+    .skills-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .skill-item {
+      margin-bottom: 5px;
+    }
+    
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .skill-info h4 {
+      font-size: 1rem;
+      color: var(--color-light);
+      font-weight: 500;
+      margin: 0;
+    }
+    
+    .skill-info span {
+      color: var(--color-highlight);
+      font-weight: 600;
+    }
+    
+    .skill-bar {
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-highlight), var(--color-secondary));
+      border-radius: 4px;
+      position: relative;
+      transition: width 1.5s ease-in-out;
+      width: 0;
+    }
+    
+    /* Estilos para el contenedor del grafo de conocimientos */
+    .knowledge-graph-container {
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Estilos responsivos para las habilidades */
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .skills-container,
+      .knowledge-graph-container {
+        padding: 20px;
+      }
+      
+      .skills-subtitle {
+        font-size: 1.5rem;
+      }
+      
+      /* Estilos del grafo temporalmente eliminados */
+    }
+    
+    /* Ajustes para pantallas muy pequeñas */
+    @media (max-width: 480px) {
+      /* Ajustes generales */
+      h2 {
+        font-size: 2rem;
+      }
+      
+      /* Ajustes para la sección de habilidades */
+      .skills-container,
+      .knowledge-graph-container {
+        padding: 15px;
+      }
+      
+      .skills-subtitle {
+        font-size: 1.3rem;
+      }
+      
+      .skill-info h4 {
+        font-size: 0.9rem;
+      }
+      
+      /* Estilos del grafo temporalmente eliminados */
+      
+      .graph-legend {
+        max-width: 150px;
+        font-size: 0.8rem;
+        padding: 8px 10px;
+      }
+      
+      .legend-item {
+        margin-bottom: 4px;
+      }
+      
+      /* Ajustes para la sección de proyectos */
+      .proyecto-card {
+        margin-bottom: 20px;
+      }
+      
+      .proyecto-img {
+        height: 160px;
+      }
+      
+      .proyecto-info h3 {
+        font-size: 1.3rem;
+      }
+      
+      .proyecto-tech span {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+      }
+      
+      /* Ajustes para la sección de experiencia */
+      .timeline-header {
+        font-size: 1.5rem;
+      }
+      
+      .timeline-content h4 {
+        font-size: 1.1rem;
+      }
+      
+      .timeline-content h5 {
+        font-size: 0.9rem;
+      }
+      
+      .timeline-content p {
+        font-size: 0.9rem;
+      }
+      
+      /* Ajustes para la sección de contacto */
+      .contacto-item i {
+        font-size: 1.2rem;
+      }
+      
+      .contacto-item h4 {
+        font-size: 1rem;
+      }
+      
+      .contacto-redes a {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      
+      .form-group input,
+      .form-group textarea {
+        padding: 10px;
+      }
+      
+      .btn-enviar {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    #mynetwork {
+      width: 100%;
+      height: 600px;
+      border: 1px solid rgba(var(--color-secondary-rgb), 0.3);
+      border-radius: 10px;
+      background-color: rgba(10, 15, 30, 0.7);
+      box-shadow: 0 0 20px rgba(var(--color-secondary-rgb), 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #mynetwork::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at center, rgba(var(--color-secondary-rgb), 0.1) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .zoom-instructions {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(var(--color-bg-light-rgb), 0.8);
+      color: var(--color-secondary);
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(var(--color-secondary-rgb), 0.3);
+      border: 1px solid rgba(var(--color-secondary-rgb), 0.2);
+      backdrop-filter: blur(3px);
+    }
+    
+    .graph-legend {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(var(--color-bg-light-rgb), 0.8);
+      color: var(--color-light);
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(var(--color-secondary-rgb), 0.3);
+      border: 1px solid rgba(var(--color-secondary-rgb), 0.2);
+      backdrop-filter: blur(3px);
+      max-width: 200px;
+    }
+    
+    .legend-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: var(--color-highlight);
+      font-size: 1rem;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+    
+    .legend-color {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin-right: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Estilos del panel de información temporalmente eliminados */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra de navegación fija -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="#inicio" class="navbar-logo">EMANUEL VAHOS</a>
+      <button class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="navbar-menu" id="navbar-menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#acerca-de">Acerca de mí</a></li>
+        <li><a href="#habilidades">Conocimientos</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Sección 1: Portada -->
+  <section class="portada" id="inicio">
+    <div class="portada-content">
+      <div class="portada-foto">
+        <img src="img/fotocv.jpg" alt="Emanuel Vahos Villa" class="foto-perfil">
+      </div>
+      <h1>PORTFOLIO</h1>
+      <h2>EMANUEL VAHOS VILLA</h2>
+      <p class="portada-inscripcion">Estudiante ingeniería en ciencia de datos ITM. Con experiencia avanzada en Análisis de Datos, generación de Insights, procesos de optimización y seguimiento de métricas, habilidades en Inteligencia Artificial Generativa integrada al análisis de datos.</p>
+      <div class="portada-botones">
+        <a href="https://drive.google.com/file/d/10Q1TXOGcJdalrfi8TOzDR0DWOzXJg6By/view?usp=drive_link" target="_blank" class="btn-cv"><i class="fas fa-file-alt"></i> Ver CV</a>
+      </div>
+    </div>
+    <a href="#acerca-de" class="scroll-down">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+  
+  <!-- Sección 2: Acerca de mí -->
+  <section class="acerca-de" id="acerca-de">
+    <div class="acerca-de-content">
+      <h3>Acerca de mí</h3>
+      <p>Futuro ingeniero en ciencia de datos del ITM, apasionado por la analítica y la innovación. Mi estancia de un año en Francia me permitió expandir significativamente mis concocimientos en datos, combinando el aprendizaje cultural con el avance profesional. Orgulloso ganador del Hackathon del programa Talento Tech, siempre buscando aplicar mis habilidades para generar soluciones de impacto</p>
+      <div class="contacto">
+        <a href="tel:3057356068">
+          <i class="fas fa-phone"></i> 3057356068
+        </a>
+        <a href="https://www.linkedin.com/in/emanuel-vahos-7aa3852b0" target="_blank">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://www.instagram.com/emanuelvahos" target="_blank">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección 3: Grafo de habilidades -->
+  <section class="habilidades" id="habilidades">
+    <div class="habilidades-content">
+      <h2>MIS CONOCIMIENTOS</h2>
+      
+      <!-- Barras de progreso para habilidades técnicas -->
+      <div class="skills-container">
+        <h3 class="skills-subtitle">Habilidades Técnicas</h3>
+        <p class="skills-description">Estas son mis principales habilidades técnicas y nivel de dominio en cada una de ellas:</p>
+        
+        <div class="skills-grid">
+          <!-- Columna 1 -->
+          <div class="skills-column">
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Python</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Análisis de Datos</h4>
+                <span>Experto</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Power BI</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>SQL</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Columna 2 -->
+          <div class="skills-column">
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Machine Learning</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>IA Generativa</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Excel Avanzado</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Visualización de Datos</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Idiomas -->
+      <div class="skills-container">
+        <h3 class="skills-subtitle">Idiomas</h3>
+        <p class="skills-description">Mis conocimientos en idiomas:</p>
+        
+        <div class="skills-grid">
+          <!-- Columna 1 -->
+          <div class="skills-column">
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Español</h4>
+                <span>Nativo</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 100%"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Inglés</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Columna 2 -->
+          <div class="skills-column">
+            <div class="skill-item">
+              <div class="skill-info">
+                <h4>Francés</h4>
+                <span>Intermedio</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección de mapa de conocimientos temporalmente eliminada -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección 4: Proyectos Destacados -->
+  <section class="proyectos" id="proyectos">
+    <div class="proyectos-content">
+      <h2>PROYECTOS DESTACADOS</h2>
+      <div class="proyectos-grid">
+        <!-- Logro: Primer Puesto Hackaton -->
+        <div class="proyecto-card logro-card">
+          <div class="proyecto-img">
+            <img src="img/Hackaton.jpg" alt="Primer Puesto Hackaton">
+          </div>
+          <div class="proyecto-info">
+            <h3>Primer Puesto Hackaton</h3>
+            <p>Logro destacado al obtener el primer lugar en el hackaton organizado por TALENTO TECH, demostrando habilidades en desarrollo de soluciones innovadoras.</p>
+            <div class="proyecto-tech">
+              <span>Python</span>
+              <span>Análisis de Datos</span>
+              <span>Innovación</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="https://www.linkedin.com/posts/emanuel-vahos-7aa3852b0_del-reto-a-la-soluci%C3%B3n-as%C3%AD-naci%C3%B3-nilobot-activity-7332838479225122817-Mb61?utm_source=share&utm_medium=member_desktop&rcm=ACoAAErOUjIBsU6dqQtz_2ZB31Q_Hsp11-0zBH8" target="_blank"><i class="fas fa-trophy"></i> Ver certificado</a>
+              <a href="https://github.com/lladinog/sintax-error" target="_blank"><i class="fab fa-github"></i> Repositorio</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Proyecto 1 -->
+        <div class="proyecto-card">
+          <div class="proyecto-img">
+            <img src="img/proyectopowerbi.png" alt="Proyecto de Power BI">
+          </div>
+          <div class="proyecto-info">
+            <h3>Dashboard Analítico</h3>
+            <p>Desarrollo de un dashboard interactivo en Power BI para análisis de datos empresariales, permitiendo visualizar KPIs y tendencias de negocio en tiempo real.</p>
+            <div class="proyecto-tech">
+              <span>Power BI</span>
+              <span>DAX</span>
+              <span>SQL</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="https://app.powerbi.com/groups/me/reports/5bcb1278-e7ed-4d66-a19d-c9c718b57318/06609d63d530e9f70eca?experience=power-bi" target="_blank"><i class="fas fa-external-link-alt"></i> Ver proyecto</a>
+              <a href="#" target="_blank"><i class="fab fa-github"></i> Repositorio</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Logro: AWS Cloud Quest -->
+        <div class="proyecto-card logro-card">
+          <div class="proyecto-img">
+            <img src="img/Segundo_puesto_AWSCLOUDQUEST.png" alt="Segundo Puesto AWS CLOUD QUEST">
+          </div>
+          <div class="proyecto-info">
+            <h3>Segundo Puesto AWS CLOUD QUEST</h3>
+            <p>Logro destacado al obtener el segundo puesto en el AWS CLOUD QUEST, competencia con más de 100 participantes de la comunidad de nube del ITM.</p>
+            <div class="proyecto-tech">
+              <span>AWS</span>
+              <span>Cloud Computing</span>
+              <span>Arquitectura Cloud</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="https://www.linkedin.com/posts/emanuel-vahos-7aa3852b0_aws-cloudcomputing-itmsomoslau-activity-7371940747090104321-obx6?utm_source=share&utm_medium=member_desktop&rcm=ACoAAErOUjIBsU6dqQtz_2ZB31Q_Hsp11-0zBH8" target="_blank"><i class="fas fa-external-link-alt"></i> Ver publicación</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Proyecto 2 -->
+        <div class="proyecto-card">
+          <div class="proyecto-img">
+            <img src="img/hackatoningelean.png" alt="Proyecto Hackathon">
+          </div>
+          <div class="proyecto-info">
+            <h3>Solución Hackathon Talento Tech</h3>
+            <p>Desarrollo de una solución innovadora para el análisis de datos urbanos que resultó ganadora en el Hackathon del programa Talento Tech.</p>
+            <div class="proyecto-tech">
+              <span>Python</span>
+              <span>Machine Learning</span>
+              <span>Data Visualization</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ver proyecto</a>
+              <a href="#" target="_blank"><i class="fab fa-github"></i> Repositorio</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Proyecto 3 -->
+        <div class="proyecto-card">
+          <div class="proyecto-img">
+            <img src="img/Especialización en IA generativa para científicos de datos.png" alt="Generative AI for Data Scientists">
+          </div>
+          <div class="proyecto-info">
+            <h3>Generative AI for Data Scientists</h3>
+            <p>Este proyecto de especialización demuestra mi capacidad para diferenciar entre IA generativa y discriminativa, aplicar técnicas de ingeniería rápida y utilizar modelos y herramientas populares de IA generativa para crear texto, código, imágenes, audio y vídeo. También puedes aplicar estas habilidades a tareas de ciencia de datos durante todo el proceso de metodología de datos.</p>
+            <div class="proyecto-tech">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>IA Generativa</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="https://drive.google.com/drive/folders/1bdKjEWHoIjXJIN64k-41KtD5G_tOgIgP?usp=drive_link" target="_blank"><i class="fas fa-external-link-alt"></i> Ver proyecto</a>
+              <a href="#" target="_blank"><i class="fab fa-github"></i> Repositorio</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Proyecto: Análisis de datos para el día del amor y la amistad -->
+        <div class="proyecto-card">
+          <div class="proyecto-img">
+            <img src="img/Dashboard_fenalco.png" alt="Análisis de datos para el día del amor y la amistad">
+          </div>
+          <div class="proyecto-info">
+            <h3>Análisis de datos para el día del amor y la amistad</h3>
+            <p>Investigación realizada en alianza entre el ITM y Fenalco sobre hábitos de consumo para la celebración del Día de Amor y Amistad, revelando patrones de gasto y preferencias de compra.</p>
+            <div class="proyecto-tech">
+              <span>Power BI</span>
+              <span>Análisis de Datos</span>
+              <span>Visualización</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="https://www.itm.edu.co/noticias-principales/la-alianza-entre-el-itm-y-fenalco-revela-las-tendencias-para-amor-y-amistad/" target="_blank"><i class="fas fa-newspaper"></i> Ver publicación</a>
+              <a href="https://www.fenalcoantioquia.com/blogs/post/amor-y-amistad" target="_blank"><i class="fas fa-external-link-alt"></i> Ver proyecto</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Proyecto: Coming Soon -->
+        <div class="proyecto-card">
+          <div class="proyecto-img" style="display: flex; justify-content: center; align-items: center; background-color: rgba(17, 34, 64, 0.8);">
+            <div style="font-size: 3rem; color: var(--color-highlight);">
+              <i class="fas fa-rocket"></i>
+            </div>
+          </div>
+          <div class="proyecto-info">
+            <h3>Próximo Proyecto</h3>
+            <p>¡Nuevo proyecto emocionante en desarrollo! Pronto revelaré los detalles de esta innovadora solución tecnológica.</p>
+            <div class="proyecto-tech">
+              <span>Coming Soon</span>
+              <span>2024</span>
+            </div>
+            <div class="proyecto-links">
+              <a href="#" style="cursor: not-allowed; opacity: 0.7;"><i class="fas fa-hourglass-half"></i> En desarrollo</a>
+            </div>
+          </div>
+        </div>
+
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección 5: Experiencia -->
+  <section class="experiencia" id="experiencia">
+    <div class="experiencia-content">
+      <h2>EXPERIENCIA Y EDUCACIÓN</h2>
+      
+      <!-- Experiencia -->
+      <div class="timeline">
+        <h3 class="timeline-header">Experiencia Profesional</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2024 - Presente</div>
+          <div class="timeline-content">
+            <h4>Estudiante ITM</h4>
+            <h5>Ingeniería en Ciencia de Datos</h5>
+            <p>Análisis de datos para la toma de decisiones empresariales, desarrollo de dashboards y reportes utilizando herramientas como Power BI y Python.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2025</div>
+          <div class="timeline-content">
+            <h4>Segundo Puesto AWS CloudQuest</h4>
+            <h5>AWS</h5>
+            <p>Reconocimiento por destacado desempeño en el programa AWS CloudQuest, demostrando habilidades avanzadas en servicios cloud de Amazon.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2025</div>
+          <div class="timeline-content">
+            <h4>Primer Puesto Hackaton</h4>
+            <h5>TALENTO TECH</h5>
+            <p>Logro destacado al obtener el primer lugar en el hackaton organizado por TALENTO TECH, demostrando habilidades en desarrollo de soluciones innovadoras.</p>
+            <div class="timeline-links">
+              <a href="https://www.linkedin.com/posts/emanuel-vahos-7aa3852b0_del-reto-a-la-soluci%C3%B3n-as%C3%AD-naci%C3%B3-nilobot-activity-7332838479225122817-Mb61?utm_source=share&utm_medium=member_desktop&rcm=ACoAAErOUjIBsU6dqQtz_2ZB31Q_Hsp11-0zBH8" target="_blank"><i class="fas fa-trophy"></i> Ver certificado</a>
+              <a href="https://github.com/lladinog/sintax-error" target="_blank"><i class="fab fa-github"></i> Repositorio</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Educación -->
+      <div class="timeline">
+        <h3 class="timeline-header">Educación</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2024 - Presente</div>
+          <div class="timeline-content">
+            <h4>Ingeniería en Ciencia de Datos</h4>
+            <h5>Instituto Tecnológico Metropolitano (ITM)</h5>
+            <p>Formación en análisis de datos, estadística, programación y machine learning para la resolución de problemas complejos mediante el análisis de información.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2024</div>
+          <div class="timeline-content">
+            <h4>Certificado en Análisis de Datos</h4>
+            <h5>Google</h5>
+            <p>Certificación profesional en análisis de datos, adquiriendo habilidades en herramientas analíticas, visualización de datos y toma de decisiones basadas en datos.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2025</div>
+          <div class="timeline-content">
+            <h4>Especialización en IA Generativa</h4>
+            <h5>IBM</h5>
+            <p>Especialización en Inteligencia Artificial Generativa para científicos de datos, enfocada en el desarrollo y aplicación de modelos avanzados de IA.</p>
+          </div>
+        </div>
+        
+
+
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sección 6: Contacto -->
+  <section class="contacto-seccion" id="contacto">
+    <div class="contacto-content">
+      <h2>CONTACTO</h2>
+      <p class="contacto-descripcion">¿Interesado en trabajar juntos o tienes alguna pregunta? No dudes en contactarme.</p>
+      
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <div class="contacto-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>emanuelvahos@gmail.com</p>
+            </div>
+          </div>
+          
+          <div class="contacto-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Teléfono</h4>
+              <p>+57 305 735 6068</p>
+            </div>
+          </div>
+          
+          <div class="contacto-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Ubicación</h4>
+              <p>Medellín, Colombia</p>
+            </div>
+          </div>
+          
+          <div class="contacto-redes">
+            <a href="https://www.linkedin.com/in/emanuel-vahos-7aa3852b0" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/emanuelvahos" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <div class="contacto-formulario">
+          <form id="contact-form">
+            <div class="form-group">
+              <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="asunto" name="asunto" placeholder="Asunto">
+            </div>
+            <div class="form-group">
+              <textarea id="mensaje" name="mensaje" placeholder="Mensaje" required></textarea>
+            </div>
+            <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Panel de información temporalmente eliminado -->
+  
+  <script type="text/javascript">
+    // Inicializar Lenis para smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+    
+    // Control de la barra de navegación
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbarMenu = document.getElementById('navbar-menu');
+    
+    // Cambiar estilo de la navbar al hacer scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Menú móvil toggle
+    menuToggle.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+    });
+    
+    // Cerrar menú móvil al hacer clic en un enlace
+    document.querySelectorAll('.navbar-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navbarMenu.classList.remove('active');
+      });
+    });
+    
+    // Resaltar enlace activo en la navegación
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('.navbar-menu a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Registrar plugins de GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animación mejorada de la portada al hacer scroll
+    gsap.to('.portada', {
+      scrollTrigger: {
+        trigger: '.portada',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: -100,
+      scale: 0.9,
+      duration: 1.5,
+    });
+
+    // Animación para la sección Acerca de mí con efecto de aparición
+    gsap.fromTo('.acerca-de', 
+      { // Estado inicial
+        opacity: 0,
+        y: 100,
+        scale: 0.8,
+      },
+      { // Estado final
+        scrollTrigger: {
+          trigger: '.acerca-de',
+          start: 'top 90%',
+          end: 'top 40%',
+          scrub: 1,
+          toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+      }
+    );
+    
+    // Animación para el contenido de Acerca de mí
+    gsap.from('.x6lozz2', {
+      scrollTrigger: {
+        trigger: '.acerca-de',
+        start: 'top 80%',
+        end: 'center center',
+        scrub: 1,
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 0,
+      y: 50,
+      scale: 0.8,
+      duration: 1,
+    });
+
+    // Animación para el título y texto de Acerca de mí
+    gsap.from('.l56esfo', {
+      scrollTrigger: {
+        trigger: '.acerca-de',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      delay: 0.2,
+    });
+
+    gsap.from('.l56esfp', {
+      scrollTrigger: {
+        trigger: '.acerca-de',
+        start: 'top 60%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      delay: 0.4,
+    });
+
+    // Animación para la sección de habilidades
+    gsap.from('.habilidades-content', {
+      scrollTrigger: {
+        trigger: '.habilidades',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+    });
+    
+    // Animación para las barras de progreso de habilidades
+    gsap.from(".skills-container", {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".skills-container",
+        start: "top 80%",
+        end: "bottom 70%",
+        toggleActions: "play none none reverse"
+      },
+      onComplete: function() {
+        // Animar las barras de progreso una vez que el contenedor sea visible
+        const skillBars = document.querySelectorAll('.skill-progress');
+        skillBars.forEach(bar => {
+          const width = bar.style.width;
+          // Primero establecemos el ancho a 0
+          gsap.set(bar, { width: 0 });
+          // Luego animamos al ancho final
+          gsap.to(bar, {
+            width: width,
+            duration: 1.8,
+            ease: "power3.out",
+            delay: 0.3
+          });
+        });
+      }
+    });
+    
+    // Animación para los elementos de habilidades individuales
+    gsap.from(".skill-item", {
+      opacity: 0,
+      y: 20,
+      duration: 0.7,
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: ".skills-container",
+        start: "top 70%",
+        end: "bottom 70%",
+        toggleActions: "play none none reverse"
+      },
+      ease: "power2.out"
+    });
+    
+    // Animación para la sección de proyectos
+    gsap.from('.proyectos-content', {
+      scrollTrigger: {
+        trigger: '.proyectos',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+    });
+    
+    // Animación para las tarjetas de proyectos
+    gsap.from('.proyecto-card', {
+      scrollTrigger: {
+        trigger: '.proyectos',
+        start: 'top 60%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 50,
+      stagger: 0.3,
+      duration: 1,
+      ease: "power2.out",
+      onComplete: function() {
+        // Añadir un pequeño efecto de hover a las tarjetas
+        const cards = document.querySelectorAll('.proyecto-card');
+        cards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+              y: -10,
+              boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)',
+              duration: 0.3
+            });
+          });
+          card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+              y: 0,
+              boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
+              duration: 0.3
+            });
+          });
+        });
+      }
+    });
+    
+    // Animación para la sección de experiencia
+    gsap.from('.experiencia-content', {
+      scrollTrigger: {
+        trigger: '.experiencia',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+    });
+    
+    // Animación para los elementos de la línea de tiempo
+    gsap.from('.timeline-item', {
+      scrollTrigger: {
+        trigger: '.timeline',
+        start: 'top 70%',
+        end: 'bottom 30%',
+        scrub: 2,
+      },
+      opacity: 0,
+      x: -50,
+      stagger: 0.8,
+      duration: 1.5,
+    });
+    
+    // Animación para la sección de contacto
+    gsap.from('.contacto-content', {
+      scrollTrigger: {
+        trigger: '.contacto-seccion',
+        start: 'top 70%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+    });
+    
+    // Animación para el formulario y la información de contacto
+    gsap.from('.contacto-grid', {
+      scrollTrigger: {
+        trigger: '.contacto-seccion',
+        start: 'top 60%',
+        end: 'center center',
+        scrub: 1,
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power2.out",
+      onComplete: function() {
+        // Añadir animación a los elementos de contacto
+        gsap.from('.contacto-item', {
+          opacity: 0,
+          x: -20,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "back.out(1.2)"
+        });
+        
+        // Añadir animación a los campos del formulario
+        gsap.from('.form-group', {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power1.out",
+          delay: 0.3
+        });
+      }
+    });
+
+    // Animación de línea de tiempo al hacer scroll
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+      }
+    });
+
+    // Añadir animaciones a la línea de tiempo
+    timeline
+      .to('.portada::before', { opacity: 0.9, duration: 2 }, 0)
+      .to('.portada', { backgroundPosition: '50% 70%', duration: 4 }, 0)
+      .to('.acerca-de', { backgroundPosition: '50% 30%', duration: 4 }, 2)
+      .to('.habilidades', { backgroundPosition: '50% 50%', duration: 4 }, 4)
+      .to('.proyectos::before', { opacity: 0.95, duration: 2 }, 6)
+      .to('.proyectos', { backgroundPosition: '50% 40%', duration: 4 }, 6)
+      .to('.experiencia::before', { opacity: 0.1, duration: 2 }, 8)
+      .to('.experiencia', { backgroundPosition: '50% 60%', duration: 4 }, 8)
+      .to('.contacto-seccion::before', { opacity: 0.15, duration: 2 }, 10)
+      .to('.contacto-seccion', { backgroundPosition: '50% 40%', duration: 4 }, 10);
+
+    // Script del mapa de conocimientos temporalmente eliminado
+    
+    // Código del panel de información temporalmente eliminado
+    
+    // Navegación suave usando Lenis
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        lenis.scrollTo(target, {
+          offset: 0,
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+        
+        // Actualizar link activo
+        document.querySelectorAll('.navbar-menu a').forEach(link => link.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+    
+    // Actualizar link activo al hacer scroll
+    window.addEventListener('scroll', function() {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 300)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('.navbar-menu a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+    
+    // Funcionalidad para el formulario de contacto
+    const contactForm = document.querySelector('.contacto-formulario form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Aquí normalmente se enviaría el formulario a un servidor
+        // Por ahora, solo mostraremos un mensaje de éxito
+        const formData = new FormData(this);
+        const formElements = this.elements;
+        
+        // Simulamos envío
+        const submitBtn = this.querySelector('.btn-enviar');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Enviando...';
+        submitBtn.disabled = true;
+        
+        // Simulamos una respuesta después de 1.5 segundos
+        setTimeout(() => {
+          // Resetear el formulario
+          this.reset();
+          
+          // Mostrar mensaje de éxito
+          const successMessage = document.createElement('div');
+          successMessage.className = 'mensaje-exito';
+          successMessage.textContent = '¡Mensaje enviado con éxito! Gracias por contactarme.';
+          successMessage.style.color = 'var(--color-highlight)';
+          successMessage.style.padding = '15px';
+          successMessage.style.marginTop = '15px';
+          successMessage.style.backgroundColor = 'rgba(17, 34, 64, 0.7)';
+          successMessage.style.borderRadius = '5px';
+          successMessage.style.textAlign = 'center';
+          
+          this.appendChild(successMessage);
+          
+          // Restaurar botón
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          
+          // Eliminar mensaje después de 5 segundos
+          setTimeout(() => {
+            successMessage.remove();
+          }, 5000);
+        }, 1500);
+      });
+    }
+  </script>
+</body>
+</html>

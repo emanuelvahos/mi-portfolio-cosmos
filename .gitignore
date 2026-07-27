@@ -30,3 +30,4 @@ build/
 # Archivos temporales
 tmp/
 temp/
+.vercel
